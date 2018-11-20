@@ -135,9 +135,11 @@
 </template>
 
 <script>
-const axios = require('axios');
 import _ from 'lodash';
 import Pristine from 'pristinejs';
+
+const axios = require('axios');
+
 export default {
   name: 'FormVue',
   props: {},
@@ -148,27 +150,27 @@ export default {
     };
   },
   methods: {
-    fetchUsers: function() {
+    fetchUsers() {
       const self = this;
       axios
         .get('https://api.myjson.com/bins/aoc7y')
-        .then(function(response) {
+        .then((response) => {
           self.obj = response.data;
         })
-        .catch(function(error) {
+        .catch((error) => {
           // handle error
           console.log(error);
         })
-        .then(function() {
+        .then(() => {
           // always executed
         });
     },
-    submitForm: function() {
+    submitForm() {
       if (this.pristine.validate()) {
         console.log(this.obj);
       }
     },
-    resetForm: function(event) {
+    resetForm(event) {
       this.obj = {};
       console.log(this.obj);
     },
@@ -189,7 +191,7 @@ export default {
         // class of the error text element
         errorTextClass: 'help is-danger',
       },
-      true
+      true,
     );
     this.fetchUsers();
   },

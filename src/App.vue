@@ -5,6 +5,7 @@
 <script>
 import TableVue from './components/Table.vue';
 import FormVue from './components/Form.vue';
+
 export default {
   name: 'app',
   components: {
