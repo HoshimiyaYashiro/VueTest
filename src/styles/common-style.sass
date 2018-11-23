@@ -1,0 +1,85 @@
+@import "bulma/sass/utilities/_all.sass"
+@import "bulma/sass/base/_all.sass"
+$light-blue: #E8F4F9
+$dark-blue-1: #90A4AE
+$dark-blue-2: #78909C
+$emerald: #2ecc71
+html
+  font-size: 14px
+.epic-table
+  height: 700px
+  width: 1000px
+  overflow: auto
+  .table-head
+    margin: 0
+    width: 100%
+    position: sticky
+    top: 0
+    thead
+      display: flex
+      overflow: hidden
+  .table-body
+  table thead th
+    color: $dark-blue-1
+    font-weight: 500
+    min-width: 50px
+    display: inline-flex
+  tr
+    td
+      border: 0
+      min-width: 50px
+      white-space: nowrap
+    &:hover
+      background: $light-blue
+  .user-email
+    color: $dark-blue-2
+    font-size: .9rem
+input, select, button, textarea
+  box-shadow: none !important
+.form-container
+  width: 800px
+  padding: 20px
+.has-danger
+  input, select, textarea
+    border-color: $danger !important
+.flip-switch
+  position: relative
+  width: 50px
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+
+.flip-switch-checkbox
+  display: none
+
+.flip-switch-label
+  display: block
+  overflow: visible
+  cursor: pointer
+  height: 20px
+  padding: 0
+  line-height: 20px
+  border-radius: 20px
+  background-color: #EEEEEE
+  transition: background-color 0.3s ease-in
+  &:before
+    content: ""
+    display: block
+    width: 24px
+    height: 24px
+    margin: 0px
+    background: #FFFFFF
+    position: absolute
+    top: -2px
+    bottom: 0
+    right: 27px
+    border: 1px solid #999999
+    border-radius: 100%
+    transition: all 0.3s ease-in 0s
+
+.flip-switch-checkbox:checked + .flip-switch-label
+  background-color: $emerald
+  border-color: $emerald
+  &:before
+    border-color: $emerald
+    right: 0px

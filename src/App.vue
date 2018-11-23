@@ -1,15 +1,18 @@
 <template>
-  <FormVue></FormVue>
+  <section>
+    <form-component></form-component>
+    <table-component></table-component>
+  </section>
 </template>
-
 <script>
-import TableVue from './components/Table.vue';
-import FormVue from './components/Form.vue';
+import TableComponent from './components/Table.vue';
+import FormComponent from './components/Form.vue';
 
 export default {
   name: 'app',
   components: {
-    FormVue,
+    TableComponent,
+    FormComponent,
   },
 };
 </script>
@@ -23,4 +26,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+</style>
+<style lang="sass">
+@import "styles/common-style.sass"
+@import "bulma/sass/elements/table.sass"
+@import "bulma/sass/elements/form.sass"
+@import "bulma/sass/elements/button.sass"
 </style>

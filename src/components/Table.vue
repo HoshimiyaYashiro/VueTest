@@ -42,7 +42,7 @@ import _ from 'lodash';
 const axios = require('axios');
 
 export default {
-  name: 'TableVue',
+  name: 'TableComponent',
   props: {},
   data() {
     return {
@@ -54,10 +54,10 @@ export default {
       const self = this;
       axios
         .get('https://api.myjson.com/bins/jlp7a')
-        .then((response) => {
+        .then(response => {
           self.users = response.data;
         })
-        .catch((error) => {
+        .catch(error => {
           // handle error
           console.log(error);
         })
@@ -67,7 +67,7 @@ export default {
     },
     resizeTableHeader() {
       const tables = document.getElementsByClassName('epic-table');
-      _.forEach(tables, (table) => {
+      _.forEach(tables, table => {
         const ths = table.querySelectorAll('.table-head thead th');
         const row0 = table.querySelector('.table-body tbody tr');
         const tds = row0.querySelectorAll('td');
@@ -88,12 +88,6 @@ export default {
 };
 </script>
 
-<style lang="sass">
-@import "bulma/sass/utilities/_all.sass"
-@import "bulma/sass/base/_all.sass"
-@import "bulma/sass/elements/table.sass"
-@import "../styles/epic-table.sass"
-</style>
 <style lang="scss">
 .custom-scrollbar {
   &::-webkit-scrollbar {

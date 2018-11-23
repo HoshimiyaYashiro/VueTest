@@ -15,20 +15,28 @@
             class="input"
             type="text"
             placeholder="First Name"
-            v-model.lazy.trim="obj.first_name"
+            v-model.trim="obj.first_name"
             name="obj.first_name"
             autocomplete="off"
+            :class="{'is-danger': errors.has('obj.first_name') }"
+            v-validate="'required|letter '"
+            data-vv-as="First Name"
           >
+          <span v-if="errors.has('obj.first_name')" class="help is-danger">{{ errors.first('obj.first_name') }}</span>
         </div>
         <div class="field">
           <input
             class="input"
             type="text"
             placeholder="Last Name"
-            v-model.lazy.trim="obj.last_name"
+            v-model.trim="obj.last_name"
             name="obj.last_name"
+            :class="{'is-danger': errors.has('obj.last_name') }"
+            v-validate="'required|letter '"
+            data-vv-as="Last Name"
             autocomplete="off"
           >
+          <span v-if="errors.has('obj.last_name')" class="help is-danger">{{ errors.first('obj.last_name') }}</span>
         </div>
       </div>
     </div>
@@ -41,29 +49,35 @@
           <input
             class="input"
             type="email"
-            placeholder="First Name"
             v-model="obj.email"
             name="obj.email"
-            required
+            :class="{'is-danger': errors.has('obj.email') }"
+            data-vv-as="Email"
+            v-validate="'required|email'"
             autocomplete="off"
+            @keypress.32.prevent
           >
+          <span v-if="errors.has('obj.email')" class="help is-danger">{{ errors.first('obj.email') }}</span>
         </div>
       </div>
     </div>
     <div class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">Job</label>
+        <label class="label">Birthday</label>
       </div>
       <div class="field-body">
         <div class="field">
           <input
             class="input"
             type="text"
-            placeholder="First Name"
-            v-model="obj.job"
-            name="obj.job"
+            v-model.trim="obj.birthday"
+            name="obj.birthday"
             autocomplete="off"
+            :class="{'is-danger': errors.has('obj.birthday') }"
+            v-validate="'required|date_format:YYYY-MM-DD'"
+            data-vv-as="Birthday"
           >
+          <span v-if="errors.has('obj.birthday')" class="help is-danger">{{ errors.first('obj.birthday') }}</span>
         </div>
       </div>
     </div>
@@ -112,11 +126,9 @@
         <label class="label">Active</label>
       </div>
       <div class="field-body">
-        <div class="field">
-          <label class="checkbox">
-            <input type="checkbox" v-model="obj.is_active" name="obj.is_active">
-            True/False
-          </label>
+        <div class="flip-switch">
+            <input type="checkbox" v-model="obj.is_active" name="obj.is_active" class="flip-switch-checkbox" id="flip-switch-1">
+            <label class="flip-switch-label" for="flip-switch-1"></label>
         </div>
       </div>
     </div>
@@ -136,17 +148,15 @@
 
 <script>
 import _ from 'lodash';
-import Pristine from 'pristinejs';
 
 const axios = require('axios');
 
 export default {
-  name: 'FormVue',
+  name: 'FormComponent',
   props: {},
   data() {
     return {
       obj: {},
-      pristine: null,
     };
   },
   methods: {
@@ -154,10 +164,10 @@ export default {
       const self = this;
       axios
         .get('https://api.myjson.com/bins/aoc7y')
-        .then((response) => {
+        .then(response => {
           self.obj = response.data;
         })
-        .catch((error) => {
+        .catch(error => {
           // handle error
           console.log(error);
         })
@@ -166,9 +176,7 @@ export default {
         });
     },
     submitForm() {
-      if (this.pristine.validate()) {
-        console.log(this.obj);
-      }
+      console.log(JSON.parse(JSON.stringify(this.obj)));
     },
     resetForm(event) {
       this.obj = {};
@@ -177,38 +185,7 @@ export default {
   },
   mounted() {
     const form = document.getElementById('test-form');
-    this.pristine = new Pristine(
-      form,
-      {
-        // class of the parent element where the error/success class is added
-        classTo: 'field',
-        errorClass: 'has-danger',
-        successClass: 'has-success',
-        // class of the parent element where error text element is appended
-        errorTextParent: 'field',
-        // type of element to create for the error text
-        errorTextTag: 'p',
-        // class of the error text element
-        errorTextClass: 'help is-danger',
-      },
-      true,
-    );
     this.fetchUsers();
   },
 };
 </script>
-
-<style lang="sass">
-@import "bulma/sass/utilities/_all.sass"
-@import "bulma/sass/base/_all.sass"
-@import "bulma/sass/elements/_all.sass"
-input, select, button, textarea
-  box-shadow: none !important
-.form-container
-  height: 1000px
-  width: 800px
-  padding: 20px
-.has-danger
-  input, select, textarea
-    border-color: $danger !important
-</style>
