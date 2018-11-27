@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
   extends: ['plugin:vue/essential', '@vue/airbnb'],
   rules: {
@@ -13,9 +13,10 @@ module.exports = {
     'func-names': ['error', 'never'],
     'space-before-function-paren': ['error', 'never'],
     'no-tabs': ['error', { allowIndentationTabs: true }],
-    'no-unused-vars': 'error'
+    'no-unused-vars': ['error', { args: 'none' }],
+    'comma-dangle': [1, 'only-multiline']
   },
   parserOptions: {
-    parser: 'babel-eslint',
-  },
+    parser: 'babel-eslint'
+  }
 };

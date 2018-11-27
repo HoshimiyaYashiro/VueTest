@@ -19,10 +19,13 @@
             name="obj.first_name"
             autocomplete="off"
             :class="{'is-danger': errors.has('obj.first_name') }"
-            v-validate="'required|letter '"
+            v-validate="'required|letter: '"
             data-vv-as="First Name"
           >
-          <span v-if="errors.has('obj.first_name')" class="help is-danger">{{ errors.first('obj.first_name') }}</span>
+          <span
+            v-if="errors.has('obj.first_name')"
+            class="help is-danger"
+          >{{ errors.first('obj.first_name') }}</span>
         </div>
         <div class="field">
           <input
@@ -32,11 +35,14 @@
             v-model.trim="obj.last_name"
             name="obj.last_name"
             :class="{'is-danger': errors.has('obj.last_name') }"
-            v-validate="'required|letter '"
+            v-validate="'required|letter: '"
             data-vv-as="Last Name"
             autocomplete="off"
           >
-          <span v-if="errors.has('obj.last_name')" class="help is-danger">{{ errors.first('obj.last_name') }}</span>
+          <span
+            v-if="errors.has('obj.last_name')"
+            class="help is-danger"
+          >{{ errors.first('obj.last_name') }}</span>
         </div>
       </div>
     </div>
@@ -57,7 +63,10 @@
             autocomplete="off"
             @keypress.32.prevent
           >
-          <span v-if="errors.has('obj.email')" class="help is-danger">{{ errors.first('obj.email') }}</span>
+          <span
+            v-if="errors.has('obj.email')"
+            class="help is-danger"
+          >{{ errors.first('obj.email') }}</span>
         </div>
       </div>
     </div>
@@ -77,7 +86,10 @@
             v-validate="'required|date_format:YYYY-MM-DD'"
             data-vv-as="Birthday"
           >
-          <span v-if="errors.has('obj.birthday')" class="help is-danger">{{ errors.first('obj.birthday') }}</span>
+          <span
+            v-if="errors.has('obj.birthday')"
+            class="help is-danger"
+          >{{ errors.first('obj.birthday') }}</span>
         </div>
       </div>
     </div>
@@ -127,8 +139,14 @@
       </div>
       <div class="field-body">
         <div class="flip-switch">
-            <input type="checkbox" v-model="obj.is_active" name="obj.is_active" class="flip-switch-checkbox" id="flip-switch-1">
-            <label class="flip-switch-label" for="flip-switch-1"></label>
+          <input
+            type="checkbox"
+            v-model="obj.is_active"
+            name="obj.is_active"
+            class="flip-switch-checkbox"
+            id="flip-switch-1"
+          >
+          <label class="flip-switch-label" for="flip-switch-1"></label>
         </div>
       </div>
     </div>
@@ -147,23 +165,23 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import _ from "lodash";
 
-const axios = require('axios');
+const axios = require("axios");
 
 export default {
-  name: 'FormComponent',
+  name: "FormComponent",
   props: {},
   data() {
     return {
-      obj: {},
+      obj: {}
     };
   },
   methods: {
     fetchUsers() {
       const self = this;
       axios
-        .get('https://api.myjson.com/bins/aoc7y')
+        .get("https://api.myjson.com/bins/aoc7y")
         .then(response => {
           self.obj = response.data;
         })
@@ -181,11 +199,11 @@ export default {
     resetForm(event) {
       this.obj = {};
       console.log(this.obj);
-    },
+    }
   },
   mounted() {
-    const form = document.getElementById('test-form');
+    const form = document.getElementById("test-form");
     this.fetchUsers();
-  },
+  }
 };
 </script>
