@@ -165,12 +165,10 @@
 </template>
 
 <script>
-import _ from "lodash";
-
-const axios = require("axios");
+const axios = require('axios');
 
 export default {
-  name: "FormComponent",
+  name: 'FormComponent',
   props: {},
   data() {
     return {
@@ -181,11 +179,11 @@ export default {
     fetchUsers() {
       const self = this;
       axios
-        .get("https://api.myjson.com/bins/aoc7y")
-        .then(response => {
+        .get('https://api.myjson.com/bins/aoc7y')
+        .then((response) => {
           self.obj = response.data;
         })
-        .catch(error => {
+        .catch((error) => {
           // handle error
           console.log(error);
         })
@@ -193,16 +191,19 @@ export default {
           // always executed
         });
     },
-    submitForm() {
-      console.log(JSON.parse(JSON.stringify(this.obj)));
+    submitForm(e) {
+      this.$validator.validate().then((valid) => {
+        if (valid) console.log(JSON.parse(JSON.stringify(this.obj)));
+      });
     },
-    resetForm(event) {
-      this.obj = {};
-      console.log(this.obj);
+    resetForm(e) {
+      this.obj = { is_active: false };
+      this.$nextTick(function() {
+        this.$validator.validate();
+      });
     }
   },
   mounted() {
-    const form = document.getElementById("test-form");
     this.fetchUsers();
   }
 };

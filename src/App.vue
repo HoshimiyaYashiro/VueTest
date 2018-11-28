@@ -1,25 +1,19 @@
 <template>
   <section>
-    <form-component></form-component>
-    <table-component></table-component>
+    <router-link to="/table">Go to Table</router-link>
+    <router-link to="/form">Go to Form</router-link>
+    <router-view></router-view>
   </section>
 </template>
 <script>
-import TableComponent from './components/Table.vue';
-import FormComponent from './components/Form.vue';
-
 export default {
-  name: 'app',
-  components: {
-    TableComponent,
-    FormComponent,
-  },
+  name: 'app'
 };
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -16,6 +16,9 @@ module.exports = {
     'no-unused-vars': ['error', { args: 'none' }],
     'comma-dangle': [1, 'only-multiline']
   },
+  globals: {
+    _: true
+  },
   parserOptions: {
     parser: 'babel-eslint'
   }

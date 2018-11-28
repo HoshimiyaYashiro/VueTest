@@ -1,22 +1,28 @@
+/* eslint-disable no-unused-vars */
 import Vue from 'vue';
-import VeeValidate, { Validator } from 'vee-validate';
+import VueRouter from 'vue-router';
+import VeeValidate from 'vee-validate';
+import './js/vee-validate-extend';
+import _ from 'lodash';
 import App from './App.vue';
+import TableComponent from './components/Table.vue';
+import FormComponent from './components/Form.vue';
 
-Validator.extend('letter', {
-  getMessage: field => `The ${field} field may only contain letter characters.`,
-  validate(value, args) {
-    // eslint-disable-next-line operator-linebreak
-    const patternStart =
-      '^([a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ';
-    const patternEnd = ']+)$';
-    let pattern = patternStart + patternEnd;
-    if (args) pattern = patternStart + args + patternEnd;
-    return new RegExp(pattern).test(value);
-  }
+const routes = [
+  { path: '/table', component: TableComponent },
+  { path: '/form', component: FormComponent }
+];
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes // short for `routes: routes`
 });
+
 Vue.use(VeeValidate);
+Vue.use(VueRouter);
 Vue.config.productionTip = false;
 
 new Vue({
+  router,
   render: h => h(App)
 }).$mount('#app');
