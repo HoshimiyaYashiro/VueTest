@@ -1,4 +1,4 @@
 {
   "prettier.singleQuote": true,
-  "vetur.format.defaultFormatter.js": "prettier-eslint"
+  "vetur.format.defaultFormatter.js": "prettier"
 }

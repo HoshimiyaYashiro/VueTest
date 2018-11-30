@@ -1,13 +1,31 @@
 <template>
-  <section>
-    <router-link to="/table">Go to Table</router-link>
-    <router-link to="/form">Go to Form</router-link>
-    <router-view></router-view>
-  </section>
+  <div id="app">
+    <router-link v-if="loggedIn" to="/logout">Log out</router-link>
+    <router-link to="/form">Form</router-link>
+    <router-link to="/table">Table</router-link>
+    <template v-if="$route.matched.length">
+      <router-view></router-view>
+    </template>
+    <template v-else>
+      <p>You are logged {{ loggedIn ? 'in' : 'out' }}</p>
+    </template>
+  </div>
 </template>
 <script>
+import auth from './js/auth';
+
 export default {
-  name: 'app'
+  name: 'app',
+  data() {
+    return {
+      loggedIn: auth.loggedIn()
+    }
+  },
+  created () {
+    auth.onChange = loggedIn => {
+      this.loggedIn = loggedIn;
+    }
+  }
 };
 </script>
 
