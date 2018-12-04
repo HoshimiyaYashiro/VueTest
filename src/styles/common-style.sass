@@ -7,6 +7,8 @@ $light-blue: #E8F4F9
 $dark-blue-1: #90A4AE
 $dark-blue-2: #78909C
 $emerald: #2ecc71
+$asbestos: #7f8c8d
+$silver: #bdc3c7
 html
   font-size: 14px
 .epic-table
@@ -90,10 +92,16 @@ button
     border: solid 1px $emerald
     background-color: $emerald
     color: white
-    &:hover
+    &:hover:enabled
       border-color: $emerald
       background-color: white
       color: $emerald
+    &:disabled
+      border-color: $silver
+      background-color: $silver
+      color: white
 .field input
   border-radius: 0
   border-width: 0 0 1px 0
+.is-hide
+  display: none

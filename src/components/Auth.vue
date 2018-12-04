@@ -3,8 +3,16 @@
     <div class="auth-box">
       <nav class="tabs is-toggle is-fullwidth">
         <ul>
-          <li class="tab is-active"><a><span>Sign In</span></a></li>
-          <li class="tab"><a><span>Sign Up</span></a></li>
+          <li class="tab is-active">
+            <a>
+              <span>Sign In</span>
+            </a>
+          </li>
+          <li class="tab">
+            <a>
+              <span>Sign Up</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="content-tabs">
@@ -13,7 +21,8 @@
             class="form-container"
             @submit.prevent="submitForm"
             @reset.prevent="resetForm"
-            id="test-form"
+            id="signin-form"
+            data-vv-scope="signin-form"
           >
             <div class="field is-horizontal">
               <div class="field-label is-normal">
@@ -25,17 +34,17 @@
                     class="input"
                     type="email"
                     v-model="user.email"
-                    name="user.email"
-                    :class="{'is-danger': errors.has('user.email') }"
+                    name="email"
+                    :class="{'is-danger': errors.has('signin-form.email') }"
                     data-vv-as="Email"
                     v-validate="'required|email'"
                     autocomplete="off"
                     @keypress.32.prevent
                   >
                   <span
-                    v-if="errors.has('user.email')"
+                    v-if="errors.has('signin-form.email')"
                     class="help is-danger"
-                  >{{ errors.first('user.email') }}</span>
+                  >{{ errors.first('signin-form.email') }}</span>
                 </div>
               </div>
             </div>
@@ -49,24 +58,112 @@
                     class="input"
                     type="password"
                     placeholder="Password"
-                    v-model.trim="user.password"
-                    name="user.password"
-                    :class="{'is-danger': errors.has('user.password') }"
+                    v-model="user.password"
+                    name="password"
+                    :class="{'is-danger': errors.has('signin-form.password') }"
                     v-validate="'required|alpha'"
                     data-vv-as="Password"
                     autocomplete="off"
                   >
                   <span
-                    v-if="errors.has('user.password')"
+                    v-if="errors.has('signin-form.password')"
                     class="help is-danger"
-                  >{{ errors.first('user.password') }}</span>
+                  >{{ errors.first('signin-form.password') }}</span>
                 </div>
               </div>
             </div>
-            <button class="button is-validate is-fullwidth is-medium" type="submit" style="margin-top: 2rem">Sign In</button>
+            <button
+              class="button is-validate is-fullwidth is-medium"
+              type="submit"
+              style="margin-top: 2rem"
+              :disabled="errors.any('signin-form')"
+            >Sign In</button>
           </form>
         </div>
-        <div class="content-tab hidden" id="signup-content"></div>
+        <div class="content-tab is-hide" id="signup-content">
+          <form
+            class="form-container"
+            @submit.prevent="submitForm"
+            @reset.prevent="resetForm"
+            id="signup-form"
+            data-vv-scope="signup-form"
+          >
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Name</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <input
+                    class="input"
+                    type="text"
+                    v-model="newUser.name"
+                    name="name"
+                    :class="{'is-danger': errors.has('signup-form.name') }"
+                    v-validate="'required|alpha_spaces'"
+                    autocomplete="off"
+                  >
+                  <span
+                    v-if="errors.has('signup-form.name')"
+                    class="help is-danger"
+                  >{{ errors.first('signup-form.name') }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Email</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <input
+                    class="input"
+                    type="email"
+                    v-model="newUser.email"
+                    name="email"
+                    :class="{'is-danger': errors.has('signup-form.email') }"
+                    v-validate="'required|email'"
+                    autocomplete="off"
+                    @keypress.32.prevent
+                  >
+                  <span
+                    v-if="errors.has('signup-form.email')"
+                    class="help is-danger"
+                  >{{ errors.first('signup-form.email') }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Password</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <input
+                    class="input"
+                    type="password"
+                    v-model="newUser.password"
+                    name="password"
+                    :class="{'is-danger': errors.has('signup-form.password') }"
+                    v-validate="'required|alpha'"
+                    autocomplete="off"
+                    @keypress.32.prevent
+                  >
+                  <span
+                    v-if="errors.has('signup-form.password')"
+                    class="help is-danger"
+                  >{{ errors.first('signup-form.password') }}</span>
+                </div>
+              </div>
+            </div>
+            <button
+              class="button is-validate is-fullwidth is-medium"
+              type="submit"
+              style="margin-top: 2rem"
+              :disabled="errors.any('signup-form')"
+            >Sign Up</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
