@@ -17,7 +17,8 @@ module.exports = {
     'comma-dangle': [1, 'only-multiline']
   },
   globals: {
-    _: true
+    _: true,
+    Vue: true
   },
   parserOptions: {
     parser: 'babel-eslint'

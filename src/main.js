@@ -3,12 +3,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VeeValidate from 'vee-validate';
 import './js/vee-validate-extend';
+import Axios from 'axios';
 import _ from 'lodash';
 import auth from './js/auth';
 import App from './App.vue';
 import TableComponent from './components/Table.vue';
-import FormComponent from './components/Form.vue';
+import MainComponent from './components/Main.vue';
 import LoginComponent from './components/Login.vue';
+import AuthComponent from './components/Auth.vue';
 
 function requireAuth(to, from, next) {
   if (!auth.loggedIn()) {
@@ -23,8 +25,8 @@ function requireAuth(to, from, next) {
 
 const routes = [
   { path: '/table', component: TableComponent, beforeEnter: requireAuth },
-  { path: '/form', component: FormComponent, beforeEnter: requireAuth },
-  { path: '/login', component: LoginComponent },
+  { path: '/home', component: MainComponent, beforeEnter: requireAuth },
+  { path: '/auth', component: AuthComponent },
   {
     path: '/logout',
     beforeEnter(to, from, next) {
@@ -41,9 +43,9 @@ const router = new VueRouter({
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
-
+Vue.prototype.$http = Axios;
 new Vue({
   router,
   render: h => h(App)
 }).$mount('#app');
-router.replace({ path: '/login', redirect: '/' });
+router.replace({ path: '/auth', redirect: '/' });

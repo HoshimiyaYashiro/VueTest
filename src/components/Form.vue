@@ -165,8 +165,6 @@
 </template>
 
 <script>
-const axios = require('axios');
-
 export default {
   name: 'FormComponent',
   props: {},
@@ -178,7 +176,7 @@ export default {
   methods: {
     fetchUsers() {
       const self = this;
-      axios
+      self.$http
         .get('https://api.myjson.com/bins/aoc7y')
         .then((response) => {
           self.obj = response.data;

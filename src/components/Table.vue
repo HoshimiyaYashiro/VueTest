@@ -37,8 +37,6 @@
 </template>
 
 <script>
-const axios = require('axios');
-
 export default {
   name: 'TableComponent',
   props: {},
@@ -50,7 +48,7 @@ export default {
   methods: {
     fetchUsers() {
       const self = this;
-      axios
+      self.$http
         .get('https://api.myjson.com/bins/jlp7a')
         .then((response) => {
           self.users = response.data;

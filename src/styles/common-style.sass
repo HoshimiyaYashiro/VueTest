@@ -1,5 +1,8 @@
 @import "bulma/sass/utilities/_all.sass"
 @import "bulma/sass/base/_all.sass"
+@import "bulma/sass/grid/_all.sass"
+@import "bulma/sass/components/tabs.sass"
+@import "bulma/sass/elements/_all.sass"
 $light-blue: #E8F4F9
 $dark-blue-1: #90A4AE
 $dark-blue-2: #78909C
@@ -36,9 +39,6 @@ html
     font-size: .9rem
 input, select, button, textarea
   box-shadow: none !important
-.form-container
-  width: 800px
-  padding: 20px
 .has-danger
   input, select, textarea
     border-color: $danger !important
@@ -83,3 +83,17 @@ input, select, button, textarea
   &:before
     border-color: $emerald
     right: 0px
+button
+  &.button
+    border-radius: 0
+  &.is-validate
+    border: solid 1px $emerald
+    background-color: $emerald
+    color: white
+    &:hover
+      border-color: $emerald
+      background-color: white
+      color: $emerald
+.field input
+  border-radius: 0
+  border-width: 0 0 1px 0
