@@ -3,24 +3,22 @@
     <div class="auth-box">
       <nav class="tabs is-toggle is-fullwidth">
         <ul>
-          <li class="tab is-active">
-            <a>
+          <li class="tab" :class="{'is-active': selectedTab === 'signin'}">
+            <a @click.prevent="selectTab('signin', $event)">
               <span>Sign In</span>
             </a>
           </li>
-          <li class="tab">
-            <a>
+          <li class="tab" :class="{'is-active': selectedTab === 'signup'}">
+            <a @click.prevent="selectTab('signup', $event)">
               <span>Sign Up</span>
             </a>
           </li>
         </ul>
       </nav>
       <div class="content-tabs">
-        <div class="content-tab" id="signin-content">
+        <div class="content-tab" id="signin-content" :class="{'is-hide': selectedTab !== 'signin'}">
           <form
             class="form-container"
-            @submit.prevent="submitForm"
-            @reset.prevent="resetForm"
             id="signin-form"
             data-vv-scope="signin-form"
           >
@@ -61,7 +59,7 @@
                     v-model="user.password"
                     name="password"
                     :class="{'is-danger': errors.has('signin-form.password') }"
-                    v-validate="'required|alpha'"
+                    v-validate="'required|alpha_num'"
                     data-vv-as="Password"
                     autocomplete="off"
                   >
@@ -80,11 +78,10 @@
             >Sign In</button>
           </form>
         </div>
-        <div class="content-tab is-hide" id="signup-content">
+        <div class="content-tab" id="signup-content" :class="{'is-hide': selectedTab !== 'signup'}">
           <form
             class="form-container"
-            @submit.prevent="submitForm"
-            @reset.prevent="resetForm"
+            @submit.prevent="signup"
             id="signup-form"
             data-vv-scope="signup-form"
           >
@@ -145,7 +142,7 @@
                     v-model="newUser.password"
                     name="password"
                     :class="{'is-danger': errors.has('signup-form.password') }"
-                    v-validate="'required|alpha'"
+                    v-validate="'required|alpha_num'"
                     autocomplete="off"
                     @keypress.32.prevent
                   >
@@ -174,8 +171,27 @@ export default {
   data() {
     return {
       user: {},
-      newUser: {}
+      newUser: {},
+      selectedTab: 'signin'
     };
+  },
+  methods: {
+    selectTab(tab, e) {
+      this.selectedTab = tab;
+    },
+    signup() {
+      const self = this;
+      this.$validator.validate('signup-form.*').then((valid) => {
+        if (valid) {
+          const userDb = self.$root.userDb;
+          if (!userDb[self.newUser.email]) {
+            userDb[self.newUser.email] = JSON.parse(JSON.stringify(self.newUser));
+          } else {
+            alert('This account is exist!');
+          }
+        }
+      });
+    }
   }
 };
 </script>

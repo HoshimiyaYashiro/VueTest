@@ -11,12 +11,12 @@ export default {
   data() {
     return {
       loggedIn: auth.loggedIn()
-    }
+    };
   },
-  created () {
-    auth.onChange = loggedIn => {
+  created() {
+    auth.onChange = (loggedIn) => {
       this.loggedIn = loggedIn;
-    }
+    };
   }
 };
 </script>

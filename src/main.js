@@ -46,6 +46,9 @@ Vue.config.productionTip = false;
 Vue.prototype.$http = Axios;
 new Vue({
   router,
+  data: {
+    userDb: {}
+  },
   render: h => h(App)
 }).$mount('#app');
 router.replace({ path: '/auth', redirect: '/' });

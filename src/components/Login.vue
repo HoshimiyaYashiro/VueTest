@@ -14,28 +14,29 @@
 </template>
 
 <script>
-  import auth from '../js/auth'
-  export default {
-    data () {
-      return {
-        email: 'joe@example.com',
-        pass: '',
-        error: false
-      }
-    },
-    methods: {
-      login () {
-        const self = this;
-        auth.login(this.email, this.pass, loggedIn => {
-          if (!loggedIn) {
-            self.error = true
-          } else {
-            self.$router.replace(self.$route.query.redirect || '/')
-          }
-        })
-      }
+import auth from '../js/auth';
+
+export default {
+  data() {
+    return {
+      email: 'joe@example.com',
+      pass: '',
+      error: false
+    };
+  },
+  methods: {
+    login() {
+      const self = this;
+      auth.login(this.email, this.pass, (loggedIn) => {
+        if (!loggedIn) {
+          self.error = true;
+        } else {
+          self.$router.replace(self.$route.query.redirect || '/');
+        }
+      });
     }
   }
+};
 </script>
 
 <style>
